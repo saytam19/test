@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA — Nouvel album</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="loader" id="loader"><span>NOVA</span></div>
+  <div class="cursor" id="cursor"></div>
+
+  <!-- ========== HEADER ========== -->
+  <header class="hero" id="top">
+    <nav class="nav" id="nav">
+      <a href="#top" class="logo">NOVA<span>.</span></a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#album">Album</a></li>
+        <li><a href="#tracks">Titres</a></li>
+        <li><a href="#tour">Concerts</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#tracks" class="btn btn-small">Écouter</a>
+    </nav>
+
+    <div class="hero-bg">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="eyebrow reveal">Nouvel album — disponible maintenant</p>
+        <h1 class="hero-title">
+          <span class="line"><span>MIDNIGHT</span></span>
+          <span class="line"><span class="outline">ECHOES</span></span>
+        </h1>
+        <p class="hero-sub reveal">12 titres. Une nuit sans fin. Fais tourner la pochette pour la découvrir sous tous les angles.</p>
+        <div class="hero-actions reveal">
+          <a href="#tracks" class="btn">▶ Écouter l'album</a>
+          <a href="#album" class="btn btn-ghost">En savoir plus</a>
+        </div>
+      </div>
+
+      <!-- Pochette 3D -->
+      <div class="stage" id="stage">
+        <div class="album3d" id="album3d">
+          <div class="vinyl" id="vinyl"><div class="vinyl-label">NOVA</div></div>
+          <div class="face front">
+            <div class="cover-art">
+              <div class="sun"></div>
+              <div class="grid"></div>
+              <span class="cover-artist">NOVA</span>
+              <span class="cover-title">MIDNIGHT ECHOES</span>
+            </div>
+          </div>
+          <div class="face back">
+            <div class="back-art">
+              <h3>MIDNIGHT ECHOES</h3>
+              <ol>
+                <li>Neon Rain</li><li>Afterglow</li><li>Static Hearts</li>
+                <li>Midnight Echoes</li><li>Paper Moon</li><li>Drive</li>
+              </ol>
+              <span>© 2026 NOVA Records</span>
+            </div>
+          </div>
+          <div class="face side right"></div>
+          <div class="face side left"></div>
+          <div class="face side top"></div>
+          <div class="face side bottom"></div>
+        </div>
+        <div class="shadow"></div>
+        <p class="hint"><span>⟲</span> Glisse pour faire tourner</p>
+      </div>
+    </div>
+
+    <a href="#album" class="scroll-down" aria-label="Défiler"><span></span></a>
+  </header>
+
+  <!-- ========== MARQUEE ========== -->
+  <div class="marquee"><div class="marquee-track">
+    <span>MIDNIGHT ECHOES ✦ NOVA ✦ TOURNÉE 2026 ✦ NOUVEL ALBUM ✦ </span>
+    <span>MIDNIGHT ECHOES ✦ NOVA ✦ TOURNÉE 2026 ✦ NOUVEL ALBUM ✦ </span>
+  </div></div>
+
+  <!-- ========== ALBUM ========== -->
+  <section class="section" id="album">
+    <div class="container about">
+      <h2 class="section-title reveal">L'album</h2>
+      <p class="reveal">Enregistré entre Paris et Berlin, <strong>Midnight Echoes</strong> explore les heures où la ville s'endort. Synthés analogiques, basses profondes et voix éthérées.</p>
+      <div class="stats">
+        <div class="stat reveal"><span class="counter" data-target="12">0</span><small>Titres</small></div>
+        <div class="stat reveal"><span class="counter" data-target="48">0</span><small>Minutes</small></div>
+        <div class="stat reveal"><span class="counter" data-target="25">0</span><small>Dates de tournée</small></div>
+        <div class="stat reveal"><span class="counter" data-target="3">0</span><small>Millions d'écoutes</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TRACKS ========== -->
+  <section class="section section-alt" id="tracks">
+    <div class="container">
+      <h2 class="section-title reveal">Titres</h2>
+      <ul class="tracklist" id="tracklist"></ul>
+      <div class="player" id="player">
+        <button class="play-btn" id="playBtn" aria-label="Lecture">▶</button>
+        <div class="player-info">
+          <strong id="nowTitle">Choisis un titre</strong>
+          <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+        </div>
+        <div class="eq" id="eq"><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TOUR ========== -->
+  <section class="section" id="tour">
+    <div class="container">
+      <h2 class="section-title reveal">Concerts</h2>
+      <div class="tour-grid">
+        <article class="tour-card reveal tilt"><span class="date">12 DÉC</span><h3>Paris</h3><p>Olympia</p><a href="#contact" class="btn btn-small">Billets</a></article>
+        <article class="tour-card reveal tilt"><span class="date">18 DÉC</span><h3>Lyon</h3><p>Le Transbordeur</p><a href="#contact" class="btn btn-small">Billets</a></article>
+        <article class="tour-card reveal tilt"><span class="date">09 JAN</span><h3>Bruxelles</h3><p>Ancienne Belgique</p><a href="#contact" class="btn btn-small">Billets</a></article>
+        <article class="tour-card reveal tilt"><span class="date">21 JAN</span><h3>Montréal</h3><p>MTELUS</p><a href="#contact" class="btn btn-small">Billets</a></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="section section-alt" id="contact">
+    <div class="container contact">
+      <h2 class="section-title reveal">Contact</h2>
+      <form class="form reveal" id="form">
+        <input type="text" name="name" placeholder="Ton nom" required>
+        <input type="email" name="email" placeholder="Ton e-mail" required>
+        <textarea name="message" rows="4" placeholder="Ton message" required></textarea>
+        <button type="submit" class="btn">Envoyer</button>
+        <p class="form-msg" id="formMsg"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">© <span id="year"></span> NOVA — Tous droits réservés</footer>
+
+  <button class="to-top" id="toTop" aria-label="Haut de page">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
