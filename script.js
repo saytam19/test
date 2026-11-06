@@ -1,36 +1,35 @@
 /* =========================================================
-   NOVA — interactions & animations
+   Midnight Echoes — interactions & animations
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- Loader ---------- */
-  const reveal = () => document.body.classList.add("loaded");
-  if (document.readyState === "complete") setTimeout(reveal, 400);
-  else window.addEventListener("load", () => setTimeout(reveal, 400));
-  setTimeout(reveal, 2500); // sécurité
+  /* ---------- Animation d'entrée ---------- */
+  const start = () => document.body.classList.add("loaded");
+  requestAnimationFrame(() => setTimeout(start, 150));
 
-  /* ---------- Pochette 3D rotative ---------- */
+  /* ---------- Pochette 3D rotative (header) ---------- */
   const stage = $("#stage");
   const album = $("#album3d");
-  const cover = $(".cover-art");
+  const cover = $("#coverArt");
+  const shadow = $("#shadow");
 
-  let rotX = -10, rotY = -25;     // angle actuel
+  let rotX = -8, rotY = -28;      // angle actuel
   let velX = 0, velY = 0;         // inertie
   let dragging = false, moved = false;
   let lastX = 0, lastY = 0, lastInteraction = 0;
-  const AUTO_SPEED = 0.25;        // rotation auto (deg / frame)
+  const AUTO_SPEED = 0.22;        // rotation auto (degrés / image)
 
-  const onDown = (e) => {
+  stage.addEventListener("pointerdown", (e) => {
     dragging = true; moved = false;
     lastX = e.clientX; lastY = e.clientY;
     velX = velY = 0;
     stage.classList.add("dragging");
     stage.setPointerCapture(e.pointerId);
-  };
-  const onMove = (e) => {
+  });
+  stage.addEventListener("pointermove", (e) => {
     if (!dragging) return;
     const dx = e.clientX - lastX, dy = e.clientY - lastY;
     if (Math.abs(dx) + Math.abs(dy) > 3) moved = true;
@@ -39,18 +38,16 @@ document.addEventListener("DOMContentLoaded", () => {
     rotY += velY; rotX += velX;
     lastX = e.clientX; lastY = e.clientY;
     lastInteraction = performance.now();
-  };
-  const onUp = () => {
+  });
+  const release = () => {
     if (!dragging) return;
     dragging = false;
     stage.classList.remove("dragging");
     lastInteraction = performance.now();
-    if (!moved) album.classList.toggle("open"); // clic = sortir le vinyle
+    if (!moved) album.classList.toggle("open"); // simple clic = sortir le vinyle
   };
-  stage.addEventListener("pointerdown", onDown);
-  stage.addEventListener("pointermove", onMove);
-  stage.addEventListener("pointerup", onUp);
-  stage.addEventListener("pointercancel", onUp);
+  stage.addEventListener("pointerup", release);
+  stage.addEventListener("pointercancel", release);
 
   // Clavier (accessibilité)
   stage.tabIndex = 0;
@@ -67,54 +64,49 @@ document.addEventListener("DOMContentLoaded", () => {
     lastInteraction = performance.now();
   });
 
-  const render = () => {
+  const render = (now) => {
     if (!dragging) {
-      // inertie
       rotY += velY; rotX += velX;
       velY *= 0.94; velX *= 0.94;
-      // rotation automatique après 2 s d'inactivité
-      if (!reduceMotion && performance.now() - lastInteraction > 2000) {
+      if (!reduceMotion && now - lastInteraction > 2000) {
         rotY += AUTO_SPEED;
-        rotX += (-10 - rotX) * 0.02; // revient doucement à l'inclinaison de base
+        rotX += (-8 - rotX) * 0.02; // revient doucement à l'inclinaison de base
       }
     }
     rotX = Math.max(-60, Math.min(60, rotX));
-    const float = reduceMotion ? 0 : Math.sin(performance.now() / 900) * 10;
+    const float = reduceMotion ? 0 : Math.sin(now / 900) * 12;
     album.style.transform = `translateY(${float}px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-    // reflet lumineux qui suit la rotation
-    const shine = ((((rotY % 360) + 360) % 360) / 360) * 240 - 120;
-    cover.style.setProperty("--shine", `${shine}%`);
+    // l'ombre se resserre quand la pochette monte
+    shadow.style.setProperty("--sx", (1 - float / 60).toFixed(3));
+    // reflet qui suit la rotation
+    const angle = ((rotY % 360) + 360) % 360;
+    cover.style.setProperty("--shine", `${(angle / 360) * 240 - 120}%`);
     requestAnimationFrame(render);
   };
   requestAnimationFrame(render);
 
   /* ---------- Navigation ---------- */
-  const nav = $("#nav");
-  const burger = $("#burger");
-  const navLinks = $("#navLinks");
-  const toTop = $("#toTop");
-  const heroBg = $(".hero-bg");
+  const nav = $("#nav"), burger = $("#burger"), navLinks = $("#navLinks"), toTop = $("#toTop");
 
+  const closeMenu = () => { burger.classList.remove("open"); navLinks.classList.remove("open"); };
   burger.addEventListener("click", () => {
     burger.classList.toggle("open");
     navLinks.classList.toggle("open");
   });
-  $$("a", navLinks).forEach((a) => a.addEventListener("click", () => {
-    burger.classList.remove("open");
-    navLinks.classList.remove("open");
-  }));
+  $$("a", navLinks).forEach((a) => a.addEventListener("click", closeMenu));
 
   const sections = $$("section[id]");
   const onScroll = () => {
     const y = window.scrollY;
     nav.classList.toggle("scrolled", y > 40);
     toTop.classList.toggle("show", y > 600);
-    // lien actif
     let current = "";
     sections.forEach((s) => { if (y >= s.offsetTop - 200) current = s.id; });
     $$("a", navLinks).forEach((a) => a.classList.toggle("active", a.getAttribute("href") === `#${current}`));
-    // parallaxe du fond du header
-    if (!reduceMotion) heroBg.style.transform = `translateY(${y * 0.3}px)`;
+    // la pochette s'éloigne légèrement au scroll (parallaxe)
+    if (!reduceMotion && y < window.innerHeight) {
+      stage.style.translate = `0 ${y * 0.25}px`;
+    }
   };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
@@ -123,10 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---------- Apparition au scroll + compteurs ---------- */
   const animateCounter = (el) => {
     const target = +el.dataset.target;
-    const start = performance.now();
-    const dur = 1600;
+    const t0 = performance.now();
     const tick = (now) => {
-      const p = Math.min((now - start) / dur, 1);
+      const p = Math.min((now - t0) / 1600, 1);
       el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
       if (p < 1) requestAnimationFrame(tick);
     };
@@ -136,42 +127,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const io = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
-      const el = entry.target;
-      el.classList.add("visible");
-      const counter = $(".counter", el);
+      entry.target.classList.add("visible");
+      const counter = $(".counter", entry.target);
       if (counter) animateCounter(counter);
-      io.unobserve(el);
+      io.unobserve(entry.target);
     });
   }, { threshold: 0.15 });
 
-  // délai en cascade pour les éléments frères
-  $$(".reveal").forEach((el) => {
+  const observeReveals = () => $$(".reveal:not(.observed)").forEach((el) => {
     const siblings = [...el.parentElement.children].filter((c) => c.classList.contains("reveal"));
-    el.style.transitionDelay = `${siblings.indexOf(el) * 0.1}s`;
+    el.style.transitionDelay = `${siblings.indexOf(el) * 0.08}s`;
+    el.classList.add("observed");
     io.observe(el);
   });
 
-  /* ---------- Curseur personnalisé ---------- */
-  const cursor = $("#cursor");
-  let cx = -100, cy = -100, tx = -100, ty = -100;
-  window.addEventListener("pointermove", (e) => { tx = e.clientX; ty = e.clientY; });
-  const moveCursor = () => {
-    cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;
-    cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
-    requestAnimationFrame(moveCursor);
-  };
-  moveCursor();
-  document.addEventListener("pointerover", (e) => {
-    cursor.classList.toggle("hover", !!e.target.closest("a, button, .track, .stage"));
-  });
-
-  /* ---------- Cartes concerts : effet tilt 3D ---------- */
+  /* ---------- Cartes concerts : inclinaison 3D ---------- */
   $$(".tilt").forEach((card) => {
     card.addEventListener("pointermove", (e) => {
       const r = card.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width - 0.5;
       const y = (e.clientY - r.top) / r.height - 0.5;
-      card.style.transform = `perspective(700px) rotateX(${-y * 14}deg) rotateY(${x * 14}deg) translateZ(10px)`;
+      card.style.transitionDelay = "0s";
+      card.style.transform = `perspective(700px) rotateX(${-y * 12}deg) rotateY(${x * 12}deg) translateZ(8px)`;
     });
     card.addEventListener("pointerleave", () => { card.style.transform = ""; });
   });
@@ -187,10 +164,9 @@ document.addEventListener("DOMContentLoaded", () => {
     li.className = "track reveal";
     li.innerHTML = `<span class="track-num">${String(i + 1).padStart(2, "0")}</span><span>${title}</span><span class="track-time">${time}</span>`;
     li.addEventListener("click", () => playTrack(i));
-    li.style.transitionDelay = `${i * 0.08}s`;
     list.appendChild(li);
-    io.observe(li);
   });
+  observeReveals();
 
   const playBtn = $("#playBtn"), nowTitle = $("#nowTitle"), bar = $("#progressBar"), eq = $("#eq");
   let current = -1, playing = false, progress = 0, timer = null;
@@ -202,14 +178,13 @@ document.addEventListener("DOMContentLoaded", () => {
     eq.classList.toggle("on", playing);
     album.classList.toggle("open", playing); // le vinyle sort pendant la lecture
     clearInterval(timer);
-    if (playing) {
-      const total = toSeconds(tracks[current][1]);
-      timer = setInterval(() => {
-        progress += 100 / total;
-        if (progress >= 100) return playTrack((current + 1) % tracks.length);
-        bar.style.width = `${progress}%`;
-      }, 1000);
-    }
+    if (!playing) return;
+    const total = toSeconds(tracks[current][1]);
+    timer = setInterval(() => {
+      progress += 100 / total;
+      if (progress >= 100) return playTrack((current + 1) % tracks.length);
+      bar.style.width = `${progress}%`;
+    }, 1000);
   };
   function playTrack(i) {
     $$(".track").forEach((t, j) => t.classList.toggle("playing", j === i));
@@ -217,18 +192,30 @@ document.addEventListener("DOMContentLoaded", () => {
     nowTitle.textContent = `${tracks[i][0]} — NOVA`;
     setPlaying(true);
   }
-  playBtn.addEventListener("click", () => {
-    if (current === -1) return playTrack(0);
-    setPlaying(!playing);
-  });
+  playBtn.addEventListener("click", () => (current === -1 ? playTrack(0) : setPlaying(!playing)));
 
-  /* ---------- Formulaire ---------- */
-  $("#form").addEventListener("submit", (e) => {
+  /* ---------- Fenêtre « Envoyer un message » ---------- */
+  const modal = $("#modal"), form = $("#form"), formMsg = $("#formMsg");
+  const openModal = () => {
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    setTimeout(() => form.elements.name.focus(), 300);
+  };
+  const closeModal = () => {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+  };
+  $("#openModal").addEventListener("click", openModal);
+  $("#closeModal").addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") { closeModal(); closeMenu(); } });
+
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const name = e.target.elements.name.value.trim();
-    $("#formMsg").textContent = `Merci ${name} ! Ton message a bien été envoyé ✦`;
-    e.target.reset();
+    const name = form.elements.name.value.trim();
+    formMsg.textContent = `Merci ${name}, votre message a bien été envoyé.`;
+    form.reset();
+    setTimeout(() => { closeModal(); formMsg.textContent = ""; }, 2200);
   });
 
-  $("#year").textContent = new Date().getFullYear();
 });
