@@ -48,6 +48,30 @@ export default function Hero() {
 
   return (
     <section id="accueil" className="relative h-screen min-h-[640px] w-full overflow-hidden bg-black font-sans text-white">
+      {/* Fond animé de secours : visible si la vidéo ne peut pas se charger (hors ligne, hébergeur qui bloque les vidéos externes) */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <motion.div
+          className="absolute -left-[15%] top-[10%] h-[60vmax] w-[60vmax] rounded-full bg-[#64CEFB]/25 blur-[120px]"
+          animate={{ x: ["0%", "25%", "0%"], y: ["0%", "15%", "0%"] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute -right-[10%] bottom-[-20%] h-[55vmax] w-[55vmax] rounded-full bg-[#1d4ed8]/30 blur-[120px]"
+          animate={{ x: ["0%", "-20%", "0%"], y: ["0%", "-10%", "0%"] }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.18]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
+            maskImage: "radial-gradient(ellipse at 50% 60%, black 10%, transparent 70%)",
+            WebkitMaskImage: "radial-gradient(ellipse at 50% 60%, black 10%, transparent 70%)",
+          }}
+        />
+      </div>
+
       {/* Vidéo de fond */}
       <video
         className="absolute inset-0 h-full w-full object-cover"
