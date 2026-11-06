@@ -1,155 +1,228 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Midnight Echoes — Nouvel album</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>PLUG Boutique</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- ========== NAV ========== -->
-  <nav class="nav" id="nav">
-    <a href="#top" class="logo">Logo</a>
-    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#album">Album</a></li>
-      <li><a href="#tracks">Titres</a></li>
-      <li><a href="#tour">Concerts</a></li>
-      <li><a href="#contact">Contact</a></li>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="plug-logo" viewBox="0 0 1186 160">
+    <path d="M13 160V13H222A33 33 0 0 1 222 79H13"/>
+    <path d="M319 0V100A47 47 0 0 0 366 147H575"/>
+    <path d="M624 0V100A47 47 0 0 0 671 147H820A47 47 0 0 0 867 100V0"/>
+    <path d="M1173 47A34 34 0 0 0 1139 13H964A34 34 0 0 0 930 47V113A34 34 0 0 0 964 147H1139A34 34 0 0 0 1173 113V80H1072"/>
+  </symbol>
+</svg>
+
+<!-- Barre de « charge » qui se remplit en défilant -->
+<div class="scroll-charge" aria-hidden="true"><i id="scroll-charge"></i></div>
+
+<header id="site-header">
+  <div class="wrap nav">
+    <ul>
+      <li><a href="#packs">Nos packs</a></li>
+      <li><a href="#bornes">Les bornes</a></li>
+      <li><a href="#faq">Questions fréquentes</a></li>
     </ul>
-  </nav>
-
-  <!-- ========== HEADER (comme la photo) ========== -->
-  <header class="hero" id="top">
-    <div class="hero-text">
-      <h1 class="hero-title">
-        <span class="line"><span>Crafted</span></span>
-        <span class="line"><span>for Focus.</span></span>
-        <span class="line muted"><span>Designed</span></span>
-        <span class="line muted"><span>for Life.</span></span>
-      </h1>
-      <a href="#album" class="pill-btn">
-        Explore the Experience
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+    <a href="#top" class="logo-link" aria-label="PLUG, accueil"><svg class="logo" viewBox="0 0 1186 160"><use href="#plug-logo"/></svg></a>
+    <div class="nav-right">
+      <a href="#packs" class="btn small ghost nav-shop">Choisir mon PLUG</a>
+      <button class="btn small cart-btn" id="open-cart" aria-label="Ouvrir le panier">Panier <span class="count" id="cart-count">0</span></button>
     </div>
+  </div>
+</header>
 
-    <!-- Pochette 3D (remplace le casque) -->
-    <div class="stage" id="stage">
-      <div class="album3d" id="album3d">
-        <div class="vinyl"><div class="vinyl-label">ME</div></div>
-        <div class="face front">
-          <div class="cover-art" id="coverArt">
-            <div class="sun"></div>
-            <div class="grid"></div>
-            <span class="cover-artist">NOVA</span>
-            <span class="cover-title">MIDNIGHT ECHOES</span>
-          </div>
+<main id="top">
+  <!-- ===== Hero : mise en page de la photo, pochette 3D à la place du casque ===== -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <div class="battery" aria-label="Batterie chargée à 100 %"><span class="battery-shell"><span class="battery-fill"></span></span><span class="battery-pct" id="pct">100 %</span> Recharge sans fil à distance</div>
+        <h1 class="hero-title">
+          <span class="ln"><span>À chacun</span></span>
+          <span class="ln"><span>son <em>PLUG.</em></span></span>
+          <span class="ln soft"><span>Le plaisir</span></span>
+          <span class="ln soft"><span>jusqu'à 100 %.</span></span>
+        </h1>
+        <p class="lead hero-lead">Un boîtier sur la prise, un mini-adaptateur dans votre téléphone, et la batterie remonte toute seule, sans câble, où que vous soyez dans la pièce.</p>
+        <a href="#packs" class="pill">
+          Je découvre les packs
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="hero-visual">
+        <div class="pouch3d" id="pouch3d" tabindex="0" role="img" aria-label="Pochette PLUG en coton en 3D. Glissez ou utilisez les flèches pour la faire tourner.">
+          <img class="pouch-fallback" src="images/pochette.webp" alt="Pochette PLUG en coton">
         </div>
-        <div class="face back">
-          <div class="back-art">
-            <h3>MIDNIGHT ECHOES</h3>
-            <ol>
-              <li>Neon Rain</li><li>Afterglow</li><li>Static Hearts</li>
-              <li>Midnight Echoes</li><li>Paper Moon</li><li>Drive</li>
-            </ol>
-            <span>© 2025 NOVA Records</span>
-          </div>
-        </div>
-        <div class="face side right"></div>
-        <div class="face side left"></div>
-        <div class="face side top"></div>
-        <div class="face side bottom"></div>
-      </div>
-      <div class="shadow" id="shadow"></div>
-      <p class="hint">Glissez pour faire tourner · Cliquez pour sortir le vinyle</p>
-    </div>
-  </header>
-
-  <!-- ========== ALBUM ========== -->
-  <section class="section" id="album">
-    <div class="container">
-      <p class="eyebrow reveal">L'album</p>
-      <h2 class="section-title reveal">Douze titres pensés<br><span class="muted">pour être écoutés en entier.</span></h2>
-      <div class="stats">
-        <div class="stat reveal"><span class="counter" data-target="12">0</span><small>Titres</small></div>
-        <div class="stat reveal"><span class="counter" data-target="48">0</span><small>Minutes</small></div>
-        <div class="stat reveal"><span class="counter" data-target="25">0</span><small>Dates de tournée</small></div>
-        <div class="stat reveal"><span class="counter" data-target="3">0</span><small>Millions d'écoutes</small></div>
+        <span class="chip c1">Pochette 100 % coton</span>
+        <span class="chip c2">Livrée avec chaque pack</span>
+        <p class="drag-hint" id="drag-hint"><span class="hand">↔</span> Glissez pour faire tourner la pochette</p>
       </div>
     </div>
   </section>
 
-  <!-- ========== TITRES ========== -->
-  <section class="section section-alt" id="tracks">
-    <div class="container">
-      <p class="eyebrow reveal">Écouter</p>
-      <h2 class="section-title reveal">Titres</h2>
-      <ul class="tracklist" id="tracklist"></ul>
-      <div class="player">
-        <button class="play-btn" id="playBtn" aria-label="Lecture">▶</button>
-        <div class="player-info">
-          <strong id="nowTitle">Choisissez un titre</strong>
-          <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
-        </div>
-        <div class="eq" id="eq"><span></span><span></span><span></span><span></span><span></span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== CONCERTS ========== -->
-  <section class="section" id="tour">
-    <div class="container">
-      <p class="eyebrow reveal">En tournée</p>
-      <h2 class="section-title reveal">Concerts</h2>
-      <div class="tour-grid">
-        <article class="tour-card reveal tilt"><span class="date">12 DÉC</span><h3>Paris</h3><p>Olympia</p></article>
-        <article class="tour-card reveal tilt"><span class="date">18 DÉC</span><h3>Lyon</h3><p>Le Transbordeur</p></article>
-        <article class="tour-card reveal tilt"><span class="date">09 JAN</span><h3>Bruxelles</h3><p>Ancienne Belgique</p></article>
-        <article class="tour-card reveal tilt"><span class="date">21 JAN</span><h3>Montréal</h3><p>MTELUS</p></article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== QUESTIONS (2e image) ========== -->
-  <section class="cta" id="contact">
-    <h2 class="reveal">Vous avez d'autres questions ?</h2>
-    <p class="reveal">Notre équipe est disponible pour répondre à toutes vos interrogations</p>
-    <button class="outline-btn reveal" id="openModal">Envoyer un message</button>
-  </section>
-
-  <!-- ========== FOOTER (2e image) ========== -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <a href="#top" class="logo">Logo</a>
-      <p>© 2025 Evian x Starbucks.&nbsp; All rights reserved.</p>
-      <nav class="footer-links">
-        <a href="#">mentions légales</a>
-        <a href="#">Cookies</a>
-      </nav>
-    </div>
-  </footer>
-
-  <!-- ========== FENÊTRE MESSAGE ========== -->
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" id="closeModal" aria-label="Fermer">×</button>
-      <h3 id="modalTitle">Envoyer un message</h3>
-      <form class="form" id="form">
-        <input type="text" name="name" placeholder="Votre nom" required>
-        <input type="email" name="email" placeholder="Votre e-mail" required>
-        <textarea name="message" rows="4" placeholder="Votre message" required></textarea>
-        <button type="submit" class="pill-btn dark">Envoyer</button>
-        <p class="form-msg" id="formMsg"></p>
-      </form>
+  <!-- Bandeau défilant -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Recharge sans fil à distance</span><span>Adaptateur USB-C minuscule</span><span>Pochette 100 % coton</span><span>Coffret en carton recyclé</span><span>Livraison gratuite dès 30 €</span>
+      <span>Recharge sans fil à distance</span><span>Adaptateur USB-C minuscule</span><span>Pochette 100 % coton</span><span>Coffret en carton recyclé</span><span>Livraison gratuite dès 30 €</span>
     </div>
   </div>
 
-  <button class="to-top" id="toTop" aria-label="Haut de page">↑</button>
+  <!-- Produits -->
+  <section class="block" id="packs">
+    <div class="wrap">
+      <div class="head-c" data-reveal>
+        <span class="eyebrow">Nos packs</span>
+        <h2>Un PLUG pour chaque prise</h2>
+        <p class="lead">Seul, à deux ou pour toute la maison : choisissez le nombre de boîtiers et d'adaptateurs qu'il vous faut.</p>
+      </div>
+      <div class="grid3" id="packs-grid"></div>
+      <div class="grid2" id="acc-grid"></div>
+    </div>
+  </section>
 
-  <script src="script.js"></script>
+  <!-- Pourquoi -->
+  <section class="block" id="pourquoi">
+    <div class="wrap">
+      <div class="head-l" data-reveal>
+        <span class="eyebrow">Ce qui change avec PLUG</span>
+        <h2>Pourquoi PLUG est unique&nbsp;?</h2>
+      </div>
+      <div class="feats">
+        <div class="feat" data-reveal>
+          <svg viewBox="0 0 40 40"><path d="M6 15a20 20 0 0 1 28 0"/><path d="M11 21a13 13 0 0 1 18 0"/><path d="M16 27a6 6 0 0 1 8 0"/><circle cx="20" cy="32" r="1.5"/></svg>
+          <h3>Sans fil, à distance</h3>
+          <p>Le boîtier diffuse l'énergie dans la pièce. Votre téléphone se recharge dans la poche, sur le canapé ou sur le bureau.</p>
+        </div>
+        <div class="feat" data-reveal>
+          <svg viewBox="0 0 40 40"><rect x="13" y="4" width="14" height="14" rx="2"/><rect x="9" y="18" width="22" height="18" rx="5"/></svg>
+          <h3>Un adaptateur minuscule</h3>
+          <p>L'adaptateur USB-C reste branché en permanence. Il se fait oublier et ne gêne ni la coque ni la poche.</p>
+        </div>
+        <div class="feat" data-reveal>
+          <svg viewBox="0 0 40 40"><path d="M14 9l6-5 6 5"/><path d="M20 4v14"/><path d="M7 22l-2 8 8 2"/><path d="M5 30a16 16 0 0 0 15 6"/><path d="M33 22l2 8-8 2"/><path d="M35 30a16 16 0 0 1-15 6"/></svg>
+          <h3>Emballage responsable</h3>
+          <p>Coffret en carton recyclé et pochette en coton à 100 %. Rien de superflu dans la boîte.</p>
+        </div>
+        <div class="feat" data-reveal>
+          <svg viewBox="0 0 40 40"><rect x="4" y="12" width="28" height="16" rx="3"/><path d="M36 17v6"/><path d="M9 17v6"/><path d="M14 17v6"/><path d="M19 17v6"/></svg>
+          <h3>Dépannage partout</h3>
+          <p>Loin de chez vous ? Les bornes PLUG louent des récepteurs à partir de 0,75 € la demi-heure.</p>
+        </div>
+      </div>
+      <a href="#a-propos" class="btn ghost" data-reveal>En savoir + sur PLUG</a>
+    </div>
+  </section>
+
+  <!-- Bandeau -->
+  <section class="block">
+    <div class="wrap">
+      <div class="band" data-reveal>
+        <h2>Prêt·e à ne plus jamais voir <span class="band-pct" id="band-pct">1 %</span>&nbsp;?</h2>
+        <a href="#packs" class="btn">Commander maintenant</a>
+        <small>Livraison gratuite dès 30 €</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- À propos -->
+  <section class="block" id="a-propos">
+    <div class="wrap split">
+      <div class="txt" data-reveal>
+        <span class="eyebrow">Notre mission</span>
+        <h2>Branchez-vous au plaisir, pas à la panique</h2>
+        <p>Un plug qui ne va pas là où vous pensez, mais bien derrière votre smartphone.</p>
+        <p>Notre mission : vous offrir le plaisir d'un téléphone toujours chargé, où que vous soyez. Parce qu'un téléphone à 1 % peut provoquer plus d'angoisse qu'un « faut qu'on parle ».</p>
+        <p>Avec PLUG, fini les pannes au mauvais moment, les câbles introuvables et les crises existentielles devant une batterie rouge.</p>
+        <p><strong>Alors, où que vous soyez, ne paniquez pas. On s'occupe de vos arrières.</strong></p>
+      </div>
+      <div class="photo" data-reveal><img data-parallax src="images/boitier-prise.webp" alt="Boîtier PLUG branché sur une prise murale, anneau lumineux allumé"></div>
+    </div>
+  </section>
+
+  <!-- Bornes -->
+  <section class="block" id="bornes">
+    <div class="wrap split">
+      <div class="photo tall" data-reveal><img data-parallax src="images/borne.webp" alt="Borne PLUG en ville avec écran tactile et six récepteurs à louer"></div>
+      <div class="txt" data-reveal>
+        <span class="eyebrow">Les bornes PLUG</span>
+        <h2>Oublié votre PLUG&nbsp;? Louez-en un</h2>
+        <p>Choisissez une durée sur l'écran de la borne, payez sans contact et repartez avec un récepteur. Vous le rendez dans n'importe quelle borne PLUG.</p>
+        <div class="rates">
+          <div class="rate"><span class="num" data-count="0.75" data-suffix=" €">0,75 €</span><span class="lbl">PLUG Express</span><span class="sub">30 minutes</span></div>
+          <div class="rate"><span class="num" data-count="1.50" data-suffix=" €">1,50 €</span><span class="lbl">PLUG Standard</span><span class="sub">1 heure</span><span class="pill-tag">Le plus choisi</span></div>
+          <div class="rate"><span class="num" data-count="4.99" data-suffix=" €">4,99 €</span><span class="lbl">PLUG Journée</span><span class="sub">24 heures</span></div>
+          <div class="rate"><span class="num" data-count="6">6</span><span class="lbl">Récepteurs par borne</span><span class="sub">Écran en 4 langues</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="block" id="faq">
+    <div class="wrap">
+      <div class="head-c" data-reveal><span class="eyebrow">FAQ</span><h2>Les questions souvent posées sur PLUG</h2></div>
+      <div class="faq">
+        <details open data-reveal><summary>Comment fonctionne la recharge à distance ?<span class="x"></span></summary><div class="ans"><p>Le boîtier se branche sur une prise murale et diffuse l'énergie autour de lui. L'adaptateur, branché sur le port USB-C de votre téléphone, la capte et recharge la batterie. Vous n'avez rien à poser ni à brancher.</p></div></details>
+        <details data-reveal><summary>Quelle différence entre Complet, Duo et Famille ?<span class="x"></span></summary><div class="ans"><p>Complet contient 1 boîtier et 1 adaptateur. Duo ajoute un deuxième adaptateur pour un autre appareil sur le même boîtier. Famille contient 2 boîtiers et 4 adaptateurs pour équiper deux pièces. Les trois packs sont livrés avec la pochette en coton.</p></div></details>
+        <details data-reveal><summary>Mon téléphone est-il compatible ?<span class="x"></span></summary><div class="ans"><p>L'adaptateur s'utilise avec tous les téléphones équipés d'un port USB-C. Il fonctionne avec la plupart des coques.</p></div></details>
+        <details data-reveal><summary>Comment louer un PLUG à une borne ?<span class="x"></span></summary><div class="ans"><p>Sur l'écran de la borne, touchez « Louer un récepteur », choisissez 30 minutes, 1 heure ou 24 heures, puis payez sans contact. Le récepteur se libère et vous le rapportez dans la borne de votre choix.</p></div></details>
+        <details data-reveal><summary>Combien coûte la livraison ?<span class="x"></span></summary><div class="ans"><p>La livraison est gratuite dès 30 € d'achat. En dessous, elle coûte 4,90 €.</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="block">
+    <div class="wrap cta" data-reveal>
+      <h2>Vivez l'expérience PLUG,<br>jusqu'à 100 %</h2>
+      <a href="#packs" class="btn">Je commande</a>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="block" id="contact">
+    <div class="wrap contact" data-reveal>
+      <h2>Vous avez d'autres questions&nbsp;?</h2>
+      <p class="lead">Notre équipe vous répond sur tout : produits, bornes, livraison.</p>
+      <button class="btn ghost" id="show-form">Envoyer un message</button>
+      <form class="form" id="contact-form" hidden>
+        <div><label for="c-name">Nom</label><input id="c-name" required autocomplete="name"></div>
+        <div><label for="c-mail">E-mail</label><input id="c-mail" type="email" required autocomplete="email"></div>
+        <div><label for="c-msg">Message</label><textarea id="c-msg" rows="4" required></textarea></div>
+        <button class="btn" type="submit">Envoyer</button>
+        <p class="note" id="form-note" hidden>Merci ! Ce site est une maquette de projet étudiant : aucun message n'est réellement envoyé.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <svg class="logo" viewBox="0 0 1186 160" aria-label="PLUG"><use href="#plug-logo"/></svg>
+    <span class="muted">© 2026 PLUG · Projet fictif étudiant</span>
+    <nav><a href="#top">Mentions légales</a><a href="#top">Cookies</a></nav>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Panier" aria-hidden="true">
+  <div class="drawer-head"><h3>Votre panier</h3><button class="icon-btn" id="close-cart" aria-label="Fermer le panier">×</button></div>
+  <div class="lines" id="lines"></div>
+  <div class="totals" id="totals"></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="vendor/three.min.js"></script>
+<script src="pochette3d.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
