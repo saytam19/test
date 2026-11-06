@@ -211,6 +211,24 @@ if (pp) {
     $("#compare").innerHTML = `<thead>${head}</thead><tbody>${body}${tot}</tbody>`;
   }
 
+  // « Ce que vous recevez » : les vraies photos, avec le nombre de chaque élément
+  const BOX = [
+    { key: "b", img: "images/boitier-detoure.webp", name: "Boîtier mural", text: "Se branche sur une prise et diffuse l'énergie dans la pièce." },
+    { key: "a", img: "images/adaptateur-detoure.webp", name: "Adaptateur USB-C", text: "Reste branché sur le téléphone et capte l'énergie." },
+    { key: "pochette", img: "images/pochette-detoure.webp", name: "Pochette en coton", text: "Pour ranger et emporter vos adaptateurs. 100 % coton." },
+    { key: "coffret", img: "images/coffret-detoure.webp", name: "Coffret", text: "En carton recyclé. Rien de superflu dans la boîte." },
+  ];
+  function renderBox(p) {
+    const n = { b: p.b, a: p.a, pochette: 1, coffret: 1 };
+    $("#box-name").textContent = p.name;
+    $("#box-grid").innerHTML = BOX.map((it) => `
+      <article class="box-item">
+        <div class="shot"><span class="count">× ${n[it.key]}</span><img src="${it.img}" alt="${it.name} PLUG"></div>
+        <h3>${it.name}</h3>
+        <p>${it.text}</p>
+      </article>`).join("");
+  }
+
   function update() {
     const p = byId(current);
     $("#pack-view").innerHTML = packImgs(p);
@@ -221,12 +239,13 @@ if (pp) {
     $("#pp-incl").innerHTML = [
       p.b && `<span class="ico"><img src="${IMG.b}" alt=""> ${plural(p.b, "boîtier", "boîtiers")}</span>`,
       p.a && `<span class="ico"><img src="${IMG.a}" alt=""> ${plural(p.a, "adaptateur", "adaptateurs")}</span>`,
-      `<span class="ico"><img src="images/pochette.webp" alt=""> 1 pochette</span>`,
+      `<span class="ico"><img src="images/pochette-detoure.webp" alt=""> 1 pochette</span>`,
     ].filter(Boolean).join("");
     $("#qty").textContent = qty;
     $("#bb-name").textContent = p.name;
     $("#bb-price").textContent = fmt(p.price * qty);
     renderTable();
+    renderBox(p);
     showView("pack");
     if (location.hash.slice(1) !== current) history.replaceState(null, "", "#" + current);
   }

@@ -50,12 +50,16 @@
           <div class="view on" data-view="pack"><div class="pack" id="pack-view"></div></div>
           <div class="view" data-view="boitier"><img src="images/boitier-detoure.webp" alt="Boîtier mural PLUG"></div>
           <div class="view" data-view="adaptateur"><img src="images/adaptateur-detoure.webp" alt="Adaptateur USB-C PLUG"></div>
+          <div class="view" data-view="pochette"><img src="images/pochette-detoure.webp" alt="Pochette PLUG en coton"></div>
+          <div class="view" data-view="coffret"><img src="images/coffret-detoure.webp" alt="Coffret PLUG en carton recyclé"></div>
           <div class="view photo-view" data-view="prise"><img src="images/boitier-prise.webp" alt="Boîtier PLUG branché sur une prise murale"></div>
         </div>
         <div class="thumbs">
-          <button class="thumb" data-view="pack" aria-pressed="true" aria-label="Voir la formule choisie"><img src="images/boitier-detoure.webp" alt=""></button>
-          <button class="thumb" data-view="boitier" aria-pressed="false" aria-label="Voir le boîtier"><img src="images/boitier.webp" alt=""></button>
+          <button class="thumb thumb-pack" data-view="pack" aria-pressed="true" aria-label="Voir la formule choisie"><img src="images/boitier-detoure.webp" alt=""><img src="images/adaptateur-detoure.webp" alt=""></button>
+          <button class="thumb" data-view="boitier" aria-pressed="false" aria-label="Voir le boîtier"><img src="images/boitier-detoure.webp" alt=""></button>
           <button class="thumb" data-view="adaptateur" aria-pressed="false" aria-label="Voir l'adaptateur"><img src="images/adaptateur-detoure.webp" alt=""></button>
+          <button class="thumb" data-view="pochette" aria-pressed="false" aria-label="Voir la pochette"><img src="images/pochette-detoure.webp" alt=""></button>
+          <button class="thumb" data-view="coffret" aria-pressed="false" aria-label="Voir le coffret"><img src="images/coffret-detoure.webp" alt=""></button>
           <button class="thumb photo-thumb" data-view="prise" aria-pressed="false" aria-label="Voir le boîtier sur une prise"><img src="images/boitier-prise.webp" alt=""></button>
         </div>
       </div>
@@ -102,8 +106,39 @@
     </div>
   </div>
 
-  <!-- ===== Comment ça marche ===== -->
+  <!-- ===== Ce que vous recevez ===== -->
   <section class="section" style="border-top:1px solid var(--line)">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <span class="eyebrow">Dans la boîte</span>
+        <h2>Ce que vous recevez avec <span id="box-name">PLUG Complet</span></h2>
+      </div>
+      <div class="box-grid" id="box-grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== En situation ===== -->
+  <section class="section">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <span class="eyebrow">En situation</span>
+        <h2>PLUG, chez vous et en ville</h2>
+      </div>
+      <div class="situ">
+        <figure class="situ-item wide" data-reveal>
+          <img src="images/boitier-prise.webp" alt="Boîtier PLUG branché sur une prise murale, anneau lumineux allumé">
+          <figcaption><strong>Chez vous</strong> Le boîtier se branche sur une prise murale. L'anneau lumineux indique qu'il diffuse l'énergie dans la pièce.</figcaption>
+        </figure>
+        <figure class="situ-item" data-reveal>
+          <img src="images/borne.webp" alt="Borne PLUG en ville avec écran tactile et six récepteurs à louer">
+          <figcaption><strong>En ville</strong> Oublié votre adaptateur ? Les bornes PLUG louent des récepteurs dès 0,75 € la demi-heure.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Comment ça marche ===== -->
+  <section class="section">
     <div class="wrap">
       <div class="head" data-reveal>
         <span class="eyebrow">Installation</span>
