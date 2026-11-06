@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Formules PLUG</title>
+<meta name="description" content="Choisissez votre formule PLUG : Complet, Duo ou Famille.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="plug-logo" viewBox="0 0 1186 160">
+    <path d="M13 160V13H222A33 33 0 0 1 222 79H13"/>
+    <path d="M319 0V100A47 47 0 0 0 366 147H575"/>
+    <path d="M624 0V100A47 47 0 0 0 671 147H820A47 47 0 0 0 867 100V0"/>
+    <path d="M1173 47A34 34 0 0 0 1139 13H964A34 34 0 0 0 930 47V113A34 34 0 0 0 964 147H1139A34 34 0 0 0 1173 113V80H1072"/>
+  </symbol>
+</svg>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <ul class="nav-links">
+      <li><a href="produit.html" aria-current="page">Nos formules</a></li>
+      <li><a href="index.html#concept">Le concept</a></li>
+      <li><a href="index.html#faq">Questions fréquentes</a></li>
+    </ul>
+    <a href="index.html" class="logo-link" aria-label="PLUG, accueil"><svg class="logo" viewBox="0 0 1186 160"><use href="#plug-logo"/></svg></a>
+    <div class="nav-right">
+      <a href="#comparer" class="btn small ghost nav-cta">Comparer les formules</a>
+      <button class="cart-btn" id="open-cart" aria-label="Ouvrir le panier">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l-1.2 12.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9L5 7Z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg>
+        <span class="count" id="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a> / Nos formules</nav>
+
+    <!-- ===== Fiche produit ===== -->
+    <div class="pp" id="pp">
+      <div class="gallery">
+        <div class="gallery-main">
+          <div class="view on" data-view="pack"><div class="pack" id="pack-view"></div></div>
+          <div class="view" data-view="boitier"><img src="images/boitier-detoure.webp" alt="Boîtier mural PLUG"></div>
+          <div class="view" data-view="adaptateur"><img src="images/adaptateur-detoure.webp" alt="Adaptateur USB-C PLUG"></div>
+          <div class="view photo-view" data-view="prise"><img src="images/boitier-prise.webp" alt="Boîtier PLUG branché sur une prise murale"></div>
+        </div>
+        <div class="thumbs">
+          <button class="thumb" data-view="pack" aria-pressed="true" aria-label="Voir la formule choisie"><img src="images/boitier-detoure.webp" alt=""></button>
+          <button class="thumb" data-view="boitier" aria-pressed="false" aria-label="Voir le boîtier"><img src="images/boitier.webp" alt=""></button>
+          <button class="thumb" data-view="adaptateur" aria-pressed="false" aria-label="Voir l'adaptateur"><img src="images/adaptateur-detoure.webp" alt=""></button>
+          <button class="thumb photo-thumb" data-view="prise" aria-pressed="false" aria-label="Voir le boîtier sur une prise"><img src="images/boitier-prise.webp" alt=""></button>
+        </div>
+      </div>
+
+      <div class="buy">
+        <div>
+          <span class="eyebrow">Recharge sans fil à distance</span>
+          <h1>PLUG</h1>
+        </div>
+        <p class="intro" id="pp-desc"></p>
+        <div class="price-line">
+          <span class="price-big" id="pp-price">49,90 €</span>
+          <span class="price-per" id="pp-per"></span>
+        </div>
+
+        <div>
+          <p class="step-title">1. Choisissez votre formule <small>Pochette en coton incluse</small></p>
+        </div>
+        <fieldset class="formulas" id="formulas" aria-label="Formule"></fieldset>
+
+        <div>
+          <p class="step-title">Dans la boîte</p>
+        </div>
+        <div class="icons" id="pp-incl"></div>
+
+        <div>
+          <p class="step-title">2. Quantité</p>
+        </div>
+        <div class="qty-row">
+          <div class="stepper">
+            <button type="button" id="qty-minus" aria-label="Retirer un">−</button>
+            <output id="qty" aria-live="polite">1</output>
+            <button type="button" id="qty-plus" aria-label="Ajouter un">+</button>
+          </div>
+          <button class="btn" id="pp-add">Ajouter au panier</button>
+        </div>
+
+        <ul class="assure">
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Livraison gratuite dès 30 € (4,90 € en dessous)</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Compatible avec tous les téléphones USB-C, avec la plupart des coques</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Coffret en carton recyclé et pochette 100 % coton</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Comment ça marche ===== -->
+  <section class="section" style="border-top:1px solid var(--line)">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <span class="eyebrow">Installation</span>
+        <h2>Prêt en trois gestes</h2>
+      </div>
+      <ol class="steps">
+        <li data-reveal><h3>Branchez le boîtier</h3><p>Sur n'importe quelle prise murale de la pièce. L'anneau lumineux s'allume.</p></li>
+        <li data-reveal><h3>Insérez l'adaptateur</h3><p>Dans le port USB-C de votre téléphone. Il y reste en permanence.</p></li>
+        <li data-reveal><h3>Oubliez le câble</h3><p>Dans la pièce, la batterie remonte toute seule, dans la poche ou sur la table.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== Comparatif ===== -->
+  <section class="section" id="comparer">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <span class="eyebrow">Comparatif</span>
+        <h2>Quelle formule pour vous&nbsp;?</h2>
+        <p class="lead">Un boîtier équipe une pièce. Chaque adaptateur équipe un téléphone.</p>
+      </div>
+      <div class="table-wrap" data-reveal><table class="compare" id="compare"></table></div>
+    </div>
+  </section>
+
+  <!-- ===== Accessoires ===== -->
+  <section class="section">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <span class="eyebrow">À l'unité</span>
+        <h2>Complétez votre installation</h2>
+      </div>
+      <div class="acc" id="acc"></div>
+    </div>
+  </section>
+
+  <!-- ===== Bandeau ===== -->
+  <section class="section">
+    <div class="wrap">
+      <div class="band" data-reveal>
+        <h2>Une question avant de commander&nbsp;?</h2>
+        <a href="index.html#faq" class="btn invert">Lire les questions fréquentes</a>
+        <small>Livraison gratuite dès 30 €</small>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot">
+    <svg class="logo" viewBox="0 0 1186 160" aria-label="PLUG"><use href="#plug-logo"/></svg>
+    <p>© 2026 PLUG. Projet fictif étudiant.</p>
+    <nav><a href="#">Mentions légales</a><a href="#">Cookies</a></nav>
+  </div>
+</footer>
+
+<!-- Barre d'achat (mobile) -->
+<div class="buybar" id="buybar">
+  <div><strong id="bb-name">PLUG Complet</strong><span id="bb-price">49,90 €</span></div>
+  <button class="btn" id="bb-add">Ajouter au panier</button>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Panier" aria-hidden="true">
+  <div class="drawer-head"><h2>Votre panier</h2><button class="icon-btn" id="close-cart" aria-label="Fermer le panier">×</button></div>
+  <div class="lines" id="lines"></div>
+  <div class="totals" id="totals"></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

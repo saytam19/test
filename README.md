@@ -1,22 +1,10 @@
 # PLUG Boutique
 
-Site vitrine et boutique (projet étudiant fictif).
+Site de vente PLUG (projet étudiant fictif). HTML, CSS et JavaScript simples : ouvrez `index.html` dans un navigateur, rien à installer.
 
-## Lancer le site
-
-```bash
-npm install
-npm run dev      # serveur de développement : http://localhost:5173
-npm run build    # version finale dans dist/ (à mettre en ligne)
-```
-
-Le site passe maintenant par Vite : il faut `npm run dev`, ou héberger `dist/`. Ouvrir `index.html` en double-cliquant ne suffit plus.
-
-## Organisation
-
-- `src/components/Hero.tsx` : hero vidéo futuriste (React, TypeScript, Tailwind, framer-motion, lucide-react)
-- `src/components/ShinyText.tsx` : texte au reflet animé (« au futur. »)
-- `public/pochette3d.js` : pochette PLUG en 3D (Three.js, dans `public/vendor/`)
-- `public/script.js` : boutique (packs, panier) et animations du reste du site
-- `public/style.css` : charte PLUG
-- `public/images/` : photos des produits
+- `index.html` : accueil (trame de la maquette : hero, formules, concept, pourquoi PLUG, bandeau, bornes, FAQ, contact)
+- `produit.html` : page produit avec choix de la formule, quantité, comparatif et accessoires (`produit.html#duo` ouvre directement la formule Duo)
+- `style.css` : styles communs
+- `app.js` : produits, panier (partagé entre les deux pages), batterie animée, page produit
+- `images/` : photos produits (`*-detoure.webp` = détourées)
+- `qr-code-plug.png` : QR code vers la version en ligne
