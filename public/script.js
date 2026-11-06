@@ -149,8 +149,11 @@ function onScroll() {
   header.classList.toggle("raised", y > 10);
   const drawerOpen = $("#drawer").classList.contains("on");
   const hold = performance.now() < holdHeaderUntil;
-  header.classList.toggle("hide", !drawerOpen && !hold && y > 400 && y > lastY + 2);
-  if (y < lastY - 2 || y < 400) header.classList.remove("hide");
+  // le header PLUG est collé sous le hero vidéo : on ne le cache qu'une fois le hero dépassé
+  const heroRoot = document.getElementById("hero-root");
+  const after = (heroRoot ? heroRoot.offsetHeight : 0) + 400;
+  header.classList.toggle("hide", !drawerOpen && !hold && y > after && y > lastY + 2);
+  if (y < lastY - 2 || y < after) header.classList.remove("hide");
   lastY = y;
 
   // lien actif dans le menu
@@ -167,7 +170,8 @@ function onScroll() {
       img.style.transform = `translateY(${p * -40}px)`;
     });
     // la pochette s'éloigne doucement quand on descend
-    if (y < innerHeight) pouchEl.style.translate = `0 ${y * 0.18}px`;
+    const pouchTop = pouchEl.closest("section").getBoundingClientRect().top;
+    pouchEl.style.translate = `0 ${pouchTop < 0 && -pouchTop < innerHeight ? -pouchTop * 0.18 : 0}px`;
   }
   ticking = false;
 }

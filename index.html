@@ -6,8 +6,8 @@
   <title>PLUG Boutique</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
@@ -19,6 +19,9 @@
     <path d="M1173 47A34 34 0 0 0 1139 13H964A34 34 0 0 0 930 47V113A34 34 0 0 0 964 147H1139A34 34 0 0 0 1173 113V80H1072"/>
   </symbol>
 </svg>
+
+<!-- Hero vidéo futuriste (React + Tailwind + framer-motion, voir src/components/Hero.tsx) -->
+<div id="hero-root"></div>
 
 <!-- Barre de « charge » qui se remplit en défilant -->
 <div class="scroll-charge" aria-hidden="true"><i id="scroll-charge"></i></div>
@@ -40,16 +43,16 @@
 
 <main id="top">
   <!-- ===== Hero : mise en page de la photo, pochette 3D à la place du casque ===== -->
-  <section class="hero">
+  <section class="hero" id="pochette">
     <div class="wrap hero-grid">
       <div class="hero-text">
         <div class="battery" aria-label="Batterie chargée à 100 %"><span class="battery-shell"><span class="battery-fill"></span></span><span class="battery-pct" id="pct">100 %</span> Recharge sans fil à distance</div>
-        <h1 class="hero-title">
+        <h2 class="hero-title">
           <span class="ln"><span>À chacun</span></span>
           <span class="ln"><span>son <em>PLUG.</em></span></span>
           <span class="ln soft"><span>Le plaisir</span></span>
           <span class="ln soft"><span>jusqu'à 100 %.</span></span>
-        </h1>
+        </h2>
         <p class="lead hero-lead">Un boîtier sur la prise, un mini-adaptateur dans votre téléphone, et la batterie remonte toute seule, sans câble, où que vous soyez dans la pièce.</p>
         <a href="#packs" class="pill">
           Je découvre les packs
@@ -221,8 +224,11 @@
 </aside>
 <div class="toast" id="toast" role="status"></div>
 
-<script src="vendor/three.min.js"></script>
-<script src="pochette3d.js"></script>
-<script src="script.js"></script>
+<!-- Scripts du site (servis tels quels depuis public/) -->
+<script src="./vendor/three.min.js"></script>
+<script src="./pochette3d.js"></script>
+<script src="./script.js"></script>
+<!-- Hero React -->
+<script type="module" src="/src/main.tsx"></script>
 </body>
 </html>
